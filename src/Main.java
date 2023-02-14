@@ -16,11 +16,11 @@ public class Main {
         taskManager.addTask(task1);
 
 //        Создаем 2 подзадачи с TaskStatus.NEW и добавляем в созданный эпик epic1
-        Epic epic1 = new Epic("Сделать ТЗ", "Выполнить все, что нужно", TaskStatus.NEW, twoNewSubtasks());
+        Epic epic1 = new Epic("Сделать ТЗ", "Выполнить все, что нужно", twoNewSubtasks());
         taskManager.addTask(epic1);
 
 //        Создаем 1 подзадачу с TaskStatus.NEW и добавляем в созданный эпик epic2
-        Epic epic2 = new Epic("Сделать тесты", "Придумать тесты", TaskStatus.NEW, oneNewSubtask());
+        Epic epic2 = new Epic("Сделать тесты", "Придумать тесты", oneNewSubtask());
         taskManager.addTask(epic2);
 
 //        Выводим все задачи
@@ -73,9 +73,12 @@ public class Main {
 
     }
 
+//    Набор методов для удобства тетсирования
     private static ArrayList<Subtask> twoNewSubtasks() {
         Subtask subtask1 = new Subtask("Прочитать ТЗ", "Просмотреть все пункты", TaskStatus.NEW);
         Subtask subtask2 = new Subtask("Написать программу", "Реализовать методы и классы", TaskStatus.NEW);
+//        Subtask subtask1 = new Subtask("Прочитать ТЗ", "Просмотреть все пункты", TaskStatus.DONE);
+//        Subtask subtask2 = new Subtask("Написать программу", "Реализовать методы и классы", TaskStatus.DONE);
         ArrayList<Subtask> subtasks = new ArrayList<>();
         subtasks.add(subtask1);
         subtasks.add(subtask2);
