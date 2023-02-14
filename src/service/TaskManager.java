@@ -44,7 +44,11 @@ public class TaskManager {
         }
         task.setId(id);
         System.out.println("\nЗадача " + task.getName() + " добавлена.");
-        tasks.put(id, task);
+        if (checkForEpicClass(task)) {
+            updateEpic(task.getId(), (Epic) task);
+        } else {
+            tasks.put(id, task);
+        }
     }
 
     private void updateTask(Integer id, Task task) {
@@ -53,8 +57,6 @@ public class TaskManager {
     }
 
     private void updateEpic(Integer epicId, Epic epic) {
-        tasks.put(epicId, epic);
-        System.out.println("\nЗадача " + epic.getName() + " обновлена.");
         if (epic.isNew()) {
             tasks.put(epicId , new Epic(epic.getName(), epic.getDescription(), TaskStatus.NEW, epic.getSubtasks()));
             System.out.println("\nСтатус задачи " + epic.getName() + " обновлен на NEW.");
@@ -108,7 +110,7 @@ public class TaskManager {
         return task.getClass().equals(Task.class);
     }
 
-    private boolean checkForTaskClass(Task task) {
+    private boolean checkForTaskClass(Object task) {
         return task.getClass().equals(Task.class);
     }
 
@@ -117,7 +119,7 @@ public class TaskManager {
         return epic.getClass().equals(Epic.class);
     }
 
-    private boolean checkForEpicClass(Task task) {
+    private boolean checkForEpicClass(Object task) {
         return task.getClass().equals(Epic.class);
     }
 }
