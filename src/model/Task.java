@@ -3,10 +3,10 @@ package model;
 import java.util.Objects;
 
 public class Task {
-    private final String name;
-    private final String description;
-    private int id;
-    private final TaskStatus taskStatus;
+    protected final String name;
+    protected final String description;
+    protected int id;
+    protected final TaskStatus taskStatus;
 
     public Task(String name, String description, TaskStatus taskStatus) {
         this.name = name;
@@ -14,11 +14,17 @@ public class Task {
         this.taskStatus = taskStatus;
     }
 
-    public Task(String name, String description, TaskStatus taskStatus, int id) {
+    public Task(String name, String description, TaskStatus taskStatus, int newId) {
         this.name = name;
         this.description = description;
         this.taskStatus = taskStatus;
-        this.id = id;
+        this.id = newId;
+    }
+
+    public Task(String name, String description) {
+        this.name = name;
+        this.description = description;
+        taskStatus = TaskStatus.NEW;
     }
 
     public String getName() {
