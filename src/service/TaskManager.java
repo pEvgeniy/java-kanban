@@ -39,10 +39,10 @@ public class TaskManager {
 
     public void addTask(Task task) {
         int id = uniqueId++;
+        task.setId(id);
         if (checkForEpicClass(task)) {
             ((Epic) task).setIdToSubtasks();
         }
-        task.setId(id);
         System.out.println("\nЗадача " + task.getName() + " добавлена.");
         if (checkForEpicClass(task)) {
             updateEpic(task.getId(), (Epic) task);
