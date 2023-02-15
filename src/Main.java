@@ -25,11 +25,13 @@ public class Main {
 
 //        Выводим все задачи
         System.out.println(taskManager.getTasks());
+        System.out.println("\n");
 
 //        Выводим каждую задачу по одной
         System.out.println(taskManager.getTask(0));
         System.out.println(taskManager.getTask(1));
         System.out.println(taskManager.getTask(2));
+        System.out.println("\n");
 
 //        Выводим подзадачи эпиков
         System.out.println(taskManager.getEpicSubtasks(1));
@@ -78,6 +80,8 @@ public class Main {
         Subtask subtask1 = new Subtask("Прочитать ТЗ", "Просмотреть все пункты", TaskStatus.NEW);
         Subtask subtask2 = new Subtask("Написать программу", "Реализовать методы и классы", TaskStatus.NEW);
 //        Subtask subtask1 = new Subtask("Прочитать ТЗ", "Просмотреть все пункты", TaskStatus.DONE);
+//        Subtask subtask2 = new Subtask("Написать программу", "Реализовать методы и классы", TaskStatus.DONE);
+//        Subtask subtask1 = new Subtask("Прочитать ТЗ", "Просмотреть все пункты", TaskStatus.IN_PROGRESS);
 //        Subtask subtask2 = new Subtask("Написать программу", "Реализовать методы и классы", TaskStatus.DONE);
         ArrayList<Subtask> subtasks = new ArrayList<>();
         subtasks.add(subtask1);
