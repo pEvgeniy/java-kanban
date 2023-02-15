@@ -47,7 +47,7 @@ public class Epic extends Task{
     public boolean isInProgress() {
         int inProgressCounter = 0;
         for (Subtask subtask : subtasks) {
-            if (subtask.getTaskStatus().equals(TaskStatus.IN_PROGRESS)) {
+            if (!subtask.getTaskStatus().equals(TaskStatus.DONE)) {
                 inProgressCounter++;
             }
         }
