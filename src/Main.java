@@ -2,14 +2,16 @@ import model.Epic;
 import model.Subtask;
 import model.Task;
 import model.TaskStatus;
-import service.TaskManager;
+import service.managers.InMemoryTaskManager;
+import service.Managers;
 
 import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
+        Managers managers = new Managers();
+        InMemoryTaskManager taskManager = managers.getDefault();
 
 //        Создаем задачу task1 и добавляем
         Task task1 = new Task("Пробежка", "Выйти на пробежку в 10:00", TaskStatus.NEW);
@@ -22,20 +24,32 @@ public class Main {
 //        Создаем 1 подзадачу с TaskStatus.NEW и добавляем в созданный эпик epic2
         Epic epic2 = new Epic("Сделать тесты", "Придумать тесты", oneNewSubtask());
         taskManager.addTask(epic2);
-
-//        Выводим все задачи
-        System.out.println(taskManager.getTasks());
         System.out.println("\n");
 
 //        Выводим каждую задачу по одной
         System.out.println(taskManager.getTask(0));
-        System.out.println(taskManager.getTask(1));
+//        System.out.println(taskManager.getTask(1));
         System.out.println(taskManager.getTask(2));
         System.out.println("\n");
 
 //        Выводим подзадачи эпиков
-        System.out.println(taskManager.getEpicSubtasks(1));
-        System.out.println(taskManager.getEpicSubtasks(2));
+        System.out.println(taskManager.getSubtask(1, 1));
+        taskManager.getSubtask(2, 0);
+        taskManager.getSubtask(2, 0);
+        taskManager.getSubtask(2, 0);
+        taskManager.getSubtask(2, 0);
+        taskManager.getSubtask(2, 0);
+        taskManager.getSubtask(2, 0);
+        taskManager.getSubtask(2, 0);
+        System.out.println("\n");
+
+//        Выводим историю при 10-ти просмотрах и добавляем 11-ый
+        System.out.println("historyManager:");
+        System.out.println(taskManager.historyManager.getHistory());
+        System.out.println("\n");
+        taskManager.getSubtask(2, 0);
+        System.out.println(taskManager.historyManager.getHistory());
+        System.out.println("\n");
 
 //        Меняем стаус задачи Task на DONE
         System.out.println("------------------------------------------------------------");
