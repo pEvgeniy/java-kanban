@@ -4,6 +4,7 @@ import model.Epic;
 import model.Subtask;
 import model.Task;
 import model.TaskStatus;
+import service.Managers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,7 +12,12 @@ import java.util.HashMap;
 public class InMemoryTaskManager implements TaskManager{
     private final HashMap<Integer, Task> tasks = new HashMap<>();
     private int uniqueId = 0;
-    public final InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
+    private final HistoryManager historyManager = Managers.getDefaultHistory();
+
+    @Override
+    public HistoryManager getHistoryManager() {
+        return historyManager;
+    }
 
     @Override
     public HashMap<Integer, Task> getTasks() {
