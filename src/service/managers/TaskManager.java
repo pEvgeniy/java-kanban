@@ -9,6 +9,8 @@ import java.util.HashMap;
 
 public interface TaskManager {
 
+    HistoryManager getHistoryManager();
+
     HashMap<Integer, Task> getTasks();
 
     Task getTask(Integer id);

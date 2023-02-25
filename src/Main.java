@@ -2,8 +2,10 @@ import model.Epic;
 import model.Subtask;
 import model.Task;
 import model.TaskStatus;
+import service.managers.HistoryManager;
 import service.managers.InMemoryTaskManager;
 import service.Managers;
+import service.managers.TaskManager;
 
 import java.util.ArrayList;
 
@@ -11,7 +13,8 @@ public class Main {
 
     public static void main(String[] args) {
         Managers managers = new Managers();
-        InMemoryTaskManager taskManager = managers.getDefault();
+        TaskManager taskManager = managers.getDefault();
+        HistoryManager historyManager = taskManager.getHistoryManager();
 
 //        Создаем задачу task1 и добавляем
         Task task1 = new Task("Пробежка", "Выйти на пробежку в 10:00", TaskStatus.NEW);
@@ -45,10 +48,10 @@ public class Main {
 
 //        Выводим историю при 10-ти просмотрах и добавляем 11-ый
         System.out.println("historyManager:");
-        System.out.println(taskManager.historyManager.getHistory());
+        System.out.println(historyManager.getHistory());
         System.out.println("\n");
         taskManager.getSubtask(2, 0);
-        System.out.println(taskManager.historyManager.getHistory());
+        System.out.println(historyManager.getHistory());
         System.out.println("\n");
 
 //        Меняем стаус задачи Task на DONE
