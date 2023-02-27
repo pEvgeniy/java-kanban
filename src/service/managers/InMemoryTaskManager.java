@@ -8,15 +8,15 @@ import service.Managers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager{
     private final HashMap<Integer, Task> tasks = new HashMap<>();
-    private int uniqueId = 0;
+    private int uniqueId = 1;
     private final HistoryManager historyManager = Managers.getDefaultHistory();
 
-    @Override
-    public HistoryManager getHistoryManager() {
-        return historyManager;
+    public List<Task> getHistory() {
+        return historyManager.getHistory();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class InMemoryTaskManager implements TaskManager{
     public Subtask getSubtask(Integer epicId, Integer subtaskId) {
         if (checkForEpicClass(epicId)) {
             Epic epic = (Epic) tasks.get(epicId);
-            Subtask subtask = epic.getSubtasks().get(subtaskId);
+            Subtask subtask = epic.getSubtasks().get(subtaskId - 1);
             historyManager.add(subtask);
             return subtask;
         } else {
@@ -106,7 +106,7 @@ public class InMemoryTaskManager implements TaskManager{
     @Override
     public void removeSubtask(Integer epicId, Integer subtaskId) {
         ArrayList<Subtask> subtaskList = ((Epic) tasks.get(epicId)).getSubtasks();
-        Subtask subtaskToBeDeleted = subtaskList.get(subtaskId);
+        Subtask subtaskToBeDeleted = subtaskList.get(subtaskId - 1);
         if (subtaskList.remove(subtaskToBeDeleted)) {
             System.out.println("\nЗадача удалена.");
             Epic epic = (Epic) tasks.get(epicId);
