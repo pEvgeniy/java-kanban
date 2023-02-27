@@ -23,7 +23,7 @@ public class Epic extends Task{
     }
 
     public void setIdToSubtasks() {
-        int id = 0;
+        int id = 1;
         for (Subtask subtask : subtasks) {
             subtask.setEpicId(this.id);
             subtask.setId(id);
