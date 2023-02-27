@@ -2,8 +2,6 @@ import model.Epic;
 import model.Subtask;
 import model.Task;
 import model.TaskStatus;
-import service.managers.HistoryManager;
-import service.managers.InMemoryTaskManager;
 import service.Managers;
 import service.managers.TaskManager;
 
@@ -12,9 +10,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        Managers managers = new Managers();
-        TaskManager taskManager = managers.getDefault();
-        HistoryManager historyManager = taskManager.getHistoryManager();
+        TaskManager taskManager = Managers.getDefault();
 
 //        Создаем задачу task1 и добавляем
         Task task1 = new Task("Пробежка", "Выйти на пробежку в 10:00", TaskStatus.NEW);
@@ -30,60 +26,55 @@ public class Main {
         System.out.println("\n");
 
 //        Выводим каждую задачу по одной
-        System.out.println(taskManager.getTask(0));
-//        System.out.println(taskManager.getTask(1));
-        System.out.println(taskManager.getTask(2));
+        System.out.println(taskManager.getTask(1));
+        System.out.println(taskManager.getTask(3));
         System.out.println("\n");
 
 //        Выводим подзадачи эпиков
-        System.out.println(taskManager.getSubtask(1, 1));
-        taskManager.getSubtask(2, 0);
-        taskManager.getSubtask(2, 0);
-        taskManager.getSubtask(2, 0);
-        taskManager.getSubtask(2, 0);
-        taskManager.getSubtask(2, 0);
-        taskManager.getSubtask(2, 0);
-        taskManager.getSubtask(2, 0);
+        System.out.println(taskManager.getSubtask(2, 2));
+        for (int i = 0; i < 8; i++) {
+            taskManager.getSubtask(3, 1);
+        }
         System.out.println("\n");
 
-//        Выводим историю при 10-ти просмотрах и добавляем 11-ый
+//        Выводим историю при 11-ти просмотрах и добавляем 12-ый
         System.out.println("historyManager:");
-        System.out.println(historyManager.getHistory());
+        System.out.println(taskManager.getHistory());
         System.out.println("\n");
-        taskManager.getSubtask(2, 0);
-        System.out.println(historyManager.getHistory());
+        taskManager.getSubtask(3, 1);
+        System.out.println(taskManager.getHistory());
         System.out.println("\n");
 
 //        Меняем стаус задачи Task на DONE
         System.out.println("------------------------------------------------------------");
         System.out.println("Статус задачи должен поменяться на DONE");
-        int newTaskId = 0;
+        int newTaskId = 1;
         Task newTask = new Task("Пробежка", "Выйти на пробежку в 10:00", TaskStatus.DONE, newTaskId);
         taskManager.changeTaskStatus(newTask);
-        System.out.println(taskManager.getTask(0));
+        System.out.println(taskManager.getTask(1));
 
 //        Меняем подзадачу (1 задача IN_PROGRESS, 2 NEW)
         System.out.println("------------------------------------------------------------");
         System.out.println("Статус эпика должен поменяться на IN_PROGRESS");
-        int newEpic1Id = 1;
+        int newEpic1Id = 2;
         taskManager.changeEpicStatus(new Epic("Сделать ТЗ", "Выполнить все, что нужно", TaskStatus.NEW, twoSubtasksOneInProgress(), newEpic1Id));
-        System.out.println(taskManager.getTask(1));
+        System.out.println(taskManager.getTask(2));
 
 //        Меняем подзадачу (единственная подзадача становится DONE)
         System.out.println("------------------------------------------------------------");
         System.out.println("Статус эпика должен поменяться на DONE");
-        int newEpic2Id = 2;
+        int newEpic2Id = 3;
         taskManager.changeEpicStatus(new Epic("Сделать тесты", "Придумать тесты", TaskStatus.NEW, oneDoneSubtask(), newEpic2Id));
-        System.out.println(taskManager.getTask(2));
+        System.out.println(taskManager.getTask(3));
 
         System.out.println("------------------------------------------------------------");
-        taskManager.removeTask(0);
+        taskManager.removeTask(1);
         System.out.println(taskManager.getTasks());
 
 //        Удаляем подзадачу IN_PROGRESS, остается одна задача NEW, статус эпика должен обратно вернуться на NEW
         System.out.println("------------------------------------------------------------");
         System.out.println("Статус эпика должен поменяться на NEW");
-        taskManager.removeSubtask(1, 0);
+        taskManager.removeSubtask(2, 1);
         System.out.println(taskManager.getTasks());
 
         System.out.println("------------------------------------------------------------");
