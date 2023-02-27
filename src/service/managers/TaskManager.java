@@ -6,10 +6,11 @@ import model.Task;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public interface TaskManager {
 
-    HistoryManager getHistoryManager();
+    List<Task> getHistory();
 
     HashMap<Integer, Task> getTasks();
 
