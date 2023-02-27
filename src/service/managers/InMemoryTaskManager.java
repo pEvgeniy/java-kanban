@@ -83,13 +83,13 @@ public class InMemoryTaskManager implements TaskManager{
     @Override
     public void updateEpic(Integer epicId, Epic epic) {
         if (epic.isNew()) {
-            tasks.put(epicId , new Epic(epic.getName(), epic.getDescription(), TaskStatus.NEW, epic.getSubtasks()));
+            tasks.put(epicId , new Epic(epic.getName(), epic.getDescription(), TaskStatus.NEW, epic.getSubtasks(), epicId));
             System.out.println("\nСтатус задачи " + epic.getName() + " обновлен на NEW.");
         } else if (epic.isEnded()) {
-            tasks.put(epicId , new Epic(epic.getName(), epic.getDescription(), TaskStatus.DONE, epic.getSubtasks()));
+            tasks.put(epicId , new Epic(epic.getName(), epic.getDescription(), TaskStatus.DONE, epic.getSubtasks(), epicId));
             System.out.println("\nСтатус задачи " + epic.getName() + " обновлен на DONE.");
         } else if (epic.isInProgress()) {
-            tasks.put(epicId , new Epic(epic.getName(), epic.getDescription(), TaskStatus.IN_PROGRESS, epic.getSubtasks()));
+            tasks.put(epicId , new Epic(epic.getName(), epic.getDescription(), TaskStatus.IN_PROGRESS, epic.getSubtasks(), epicId));
             System.out.println("\nСтатус задачи " + epic.getName() + " обновлен на IN_PROGRESS.");
         }
     }
