@@ -57,14 +57,18 @@ public class Main {
         System.out.println("------------------------------------------------------------");
         System.out.println("Статус эпика должен поменяться на IN_PROGRESS");
         int newEpic1Id = 2;
-        taskManager.changeEpicStatus(new Epic("Сделать ТЗ", "Выполнить все, что нужно", TaskStatus.NEW, twoSubtasksOneInProgress(), newEpic1Id));
+        Epic newEpic2 = new Epic("Сделать ТЗ", "Выполнить все, что нужно", TaskStatus.NEW, twoSubtasksOneInProgress(), newEpic1Id);
+        newEpic2.setIdToSubtasks();
+        taskManager.changeEpicStatus(newEpic2);
         System.out.println(taskManager.getTask(2));
 
 //        Меняем подзадачу (единственная подзадача становится DONE)
         System.out.println("------------------------------------------------------------");
         System.out.println("Статус эпика должен поменяться на DONE");
         int newEpic2Id = 3;
-        taskManager.changeEpicStatus(new Epic("Сделать тесты", "Придумать тесты", TaskStatus.NEW, oneDoneSubtask(), newEpic2Id));
+        Epic newEpic3 = new Epic("Сделать тесты", "Придумать тесты", TaskStatus.NEW, oneDoneSubtask(), newEpic2Id);
+        newEpic3.setIdToSubtasks();
+        taskManager.changeEpicStatus(newEpic3);
         System.out.println(taskManager.getTask(3));
 
         System.out.println("------------------------------------------------------------");
