@@ -12,7 +12,7 @@ public class InMemoryHistoryManager implements HistoryManager{
     @Override
     public void add(Task task) {
         if (historyList.size() == 10) {
-            historyList.remove(0);
+            historyList.remove(historyList.size() - 1);
             historyList.add(0, task);
             return;
         }
